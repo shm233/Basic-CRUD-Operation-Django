@@ -1,0 +1,26 @@
+{% extends 'master/base.html' %}
+
+{% block body %}
+  <h1>List of All Blogs as Cards</h1>
+  <div class="container">
+    <form action="" method="get">
+      <label for="inputtext5" class="form-label">SEARCH</label>
+      <input type="text" name="search" id="inputtext5" class="form-control" aria-describedby="textHelpBlock" />
+      <div id="textHelpBlock" class="form-text">Search Your Desired Blog by title or name or content</div>
+      <button type="submit" class="btn btn-primary">Search</button>
+      <a href="{% url 'home_view' %}" class="btn btn-danger">Clear</a>
+    </form>
+  </div>
+  <div class="container">
+    {% for b in blog %}
+      <div class="card" style="width: 18rem;">
+        <img src="{{ b.blog_image }}" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ b.title }}</h5>
+          <p class="card-text">{{ b.content }}</p>
+          <a href="{% url 'blog_list' %}" class="btn btn-primary">See All Blogs</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

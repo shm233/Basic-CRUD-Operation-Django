@@ -1,0 +1,40 @@
+{% extends 'master/base.html' %}
+
+{% block body %}
+  <h1>Create New Blog Post</h1>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="Name of the Title" required />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Name of Author</label>
+      <input type="text" name="author_name" class="form-control" id="exampleFormControlInput1" placeholder="Author's Name" required />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+      <textarea name="content" class="form-control" id="exampleFormControlTextarea1" placeholder="What are you blogging about" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Category</label>
+      <select name="category" class="form-select" aria-label="Default select example" required>
+        <option selected>Open this select menu</option>
+        <option value="Educational">Educational</option>
+        <option value="Technologies">Technologies</option>
+        <option value="Sports">Sports</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Blog Image</label>
+      <input type="file" name="blog_image" class="form-control" id="exampleFormControlInput1" />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Date of Publishing</label>
+      <input type="date" name="publish_date" class="form-control" id="exampleFormControlInput1" required />
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Create New Blog</button>
+    </div>
+  </form>
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.db.models import Q
 from blogs.models import *
 
@@ -13,6 +14,7 @@ def home_view(request):
             Q(author_name__icontains=search)|
             Q(content__icontains=search)
         )
+        message.success(request, "The following results matched your search")
     dictionary = {
         'blog': blog
     }

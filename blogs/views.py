@@ -36,7 +36,11 @@ def blog_add(request):
         category = request.POST.get('category')
         blog_image = request.FILES.get('blog_image')
         publish_date = request.POST.get('publish_date')
-        
+
+        same_title = BlogModel.objects.filter(title = title).exists()
+        if same_title:
+            messages.warning(request, "This title already exists, Please Change the title")
+            return redirect('blog_add')
         BlogModel.objects.create(
             title = title,
             author_name = author_name,
@@ -45,6 +49,7 @@ def blog_add(request):
             blog_image = blog_image,
             publish_date = publish_date
         )
+        messages.success(request, "New Blog has been created")
         return redirect('blog_list')        
     return render(request, 'add-blog.html')
 
@@ -57,13 +62,21 @@ def blog_edit(request, b_id):
         category = request.POST.get('category')
         blog_image = request.FILES.get('blog_image')
         publish_date = request.POST.get('publish_date')
+
+        blog_title = BlogModel.objects.filter(title = title).exists()
         
-        blog.title = title
+        if title == blog_title:
+            messages.warning(request, "Your Title remained the Same")
+        else:
+            blog.title = title
         blog.author_name = author_name
         blog.content = content
         blog.category = category
         if blog_image:
             blog.blog_image = blog_image
+            messages.success(request, "Your blog image has been changed successfully")
+        else:
+            messages.warning(request, "Your blog image remained unchanged")
         blog.publish_date = publish_date
         blog.save()
         return redirect('blog_list')

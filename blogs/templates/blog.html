@@ -2,6 +2,7 @@
 
 {% block body %}
   <h1>All Blog Posts</h1>
+  {% include 'messages.html' %}
 
   <div class="mb-4">
     <a href="{% url 'blog_add' %}" class="btn btn-success">Add New Blog</a>
